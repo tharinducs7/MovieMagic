@@ -44,6 +44,7 @@
 		C126A61E2A852FA400F28F20 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C126A61D2A852FA400F28F20 /* DataManager.swift */; };
 		C126A6202A85311800F28F20 /* SearchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C126A61F2A85311800F28F20 /* SearchList.swift */; };
 		C126A6222A85317A00F28F20 /* MovieTheater.swift in Sources */ = {isa = PBXBuildFile; fileRef = C126A6212A85317A00F28F20 /* MovieTheater.swift */; };
+		C126A6272A8A910D00F28F20 /* TheaterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C126A6262A8A910D00F28F20 /* TheaterViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		C126A61D2A852FA400F28F20 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		C126A61F2A85311800F28F20 /* SearchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchList.swift; sourceTree = "<group>"; };
 		C126A6212A85317A00F28F20 /* MovieTheater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTheater.swift; sourceTree = "<group>"; };
+		C126A6262A8A910D00F28F20 /* TheaterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +198,7 @@
 				C126A6072A852F0600F28F20 /* MoviesViewModel.swift */,
 				C126A6092A852F1200F28F20 /* GenreViewModel.swift */,
 				C126A60B2A852F1F00F28F20 /* LocationViewModel.swift */,
+				C126A6262A8A910D00F28F20 /* TheaterViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				C126A5FC2A852E8200F28F20 /* MovieHeader.swift in Sources */,
 				C126A5FA2A852E5600F28F20 /* TrendingList.swift in Sources */,
 				C126A5D32A85241400F28F20 /* ContentView.swift in Sources */,
+				C126A6272A8A910D00F28F20 /* TheaterViewModel.swift in Sources */,
 				C126A5FE2A852EAA00F28F20 /* HideKeyboard.swift in Sources */,
 				073D59A22A8A7F7A0083FD43 /* Home.swift in Sources */,
 				C126A5E62A852DC300F28F20 /* GenreTag.swift in Sources */,

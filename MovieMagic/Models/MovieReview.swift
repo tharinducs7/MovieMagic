@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MovieReview {
+struct MovieReview: Identifiable, Codable {
     let id: Int
     let userName: String
     let email: String

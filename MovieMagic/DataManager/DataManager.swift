@@ -13,7 +13,7 @@ final class DataManager {
     private let userDefaults = UserDefaults.standard
     private let moviesKey = "movies"
     private let genresKey = "genres"
-
+    private let theatersKey = "theaters"
     // MARK: - Movies
     
     func getMovies() -> [Movie] {
@@ -63,6 +63,33 @@ final class DataManager {
             encoder.keyEncodingStrategy = .convertToSnakeCase
             let data = try encoder.encode(genres)
             userDefaults.set(data, forKey: genresKey)
+        } catch {
+            print("Error encoding data: \(error)")
+        }
+    }
+    
+    // MARK: - Theaters
+    
+    func getGenres() -> [Theater] {
+        guard let data = userDefaults.data(forKey: theatersKey) else {
+            return []
+        }
+        do {
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            return try decoder.decode([Theater].self, from: data)
+        } catch {
+            print("Error decoding data: \(error)")
+            return []
+        }
+    }
+
+    func setGenres(_ theaters: [Theater]) {
+        do {
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            let data = try encoder.encode(theaters)
+            userDefaults.set(data, forKey: theatersKey)
         } catch {
             print("Error encoding data: \(error)")
         }

@@ -74,14 +74,14 @@ struct SearchList: View {
                 }
             }
             
-//            .overlay(content: {
-//                if let selectedMovie, showDetailView {
-//                    MovieDetails(show:$showDetailView, animation: animation, movie: selectedMovie)
-//                    // for more fluent animation
-//                        .transition(.asymmetric(insertion: .identity, removal: .offset(y: 5)))
-//                }
-//                
-//            })
+            .overlay(content: {
+                if let selectedMovie, showDetailView {
+                    MovieDetails(show:$showDetailView, animation: animation, movie: selectedMovie)
+                    // for more fluent animation
+                        .transition(.asymmetric(insertion: .identity, removal: .offset(y: 5)))
+                }
+                
+            })
         }
     }
     

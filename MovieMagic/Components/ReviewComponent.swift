@@ -42,8 +42,8 @@ struct ReviewComponent: View {
     }
 }
 
-struct ReviewComponent_Previews: PreviewProvider {
-    static var previews: some View {
-        ReviewComponent(review: MovieReview(id: 1, userName: "John Doe", email: "johndoe@example.com", rating: 4, review: "This is a great movie. I highly recommend it!", reviewTitle: "Nice Movie"))
-    }
-}
+//struct ReviewComponent_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ReviewComponent(review: MovieReview(id: 1, userName: "John Doe", email: "johndoe@example.com", rating: 4, review: "This is a great movie. I highly recommend it!", reviewTitle: "Nice Movie"))
+//    }
+//}

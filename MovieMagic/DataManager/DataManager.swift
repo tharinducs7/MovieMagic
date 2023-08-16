@@ -14,6 +14,8 @@ final class DataManager {
     private let moviesKey = "movies"
     private let genresKey = "genres"
     private let theatersKey = "theaters"
+    private let reviewsKey = "reviews"
+    
     // MARK: - Movies
     
     func getMovies() -> [Movie] {
@@ -90,6 +92,33 @@ final class DataManager {
             encoder.keyEncodingStrategy = .convertToSnakeCase
             let data = try encoder.encode(theaters)
             userDefaults.set(data, forKey: theatersKey)
+        } catch {
+            print("Error encoding data: \(error)")
+        }
+    }
+    
+    // MARK: - Reviews
+    
+    func getReviews() -> [MovieReview] {
+        guard let data = userDefaults.data(forKey: reviewsKey) else {
+            return []
+        }
+        do {
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            return try decoder.decode([MovieReview].self, from: data)
+        } catch {
+            print("Error decoding data: \(error)")
+            return []
+        }
+    }
+
+    func setReviews(_ reviews: [MovieReview]) {
+        do {
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            let data = try encoder.encode(reviews)
+            userDefaults.set(data, forKey: reviewsKey)
         } catch {
             print("Error encoding data: \(error)")
         }

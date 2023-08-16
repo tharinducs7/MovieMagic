@@ -21,7 +21,7 @@ struct TabBarComponent: View {
     var body: some View {
         VStack(spacing: 0) {
             TabView(selection: $activeTab) {
-                Text("Home")
+                Home()
                     .tag(Tab.home)
                     .onTapGesture {
                         self.hideKeyboard()
@@ -33,7 +33,7 @@ struct TabBarComponent: View {
                         self.hideKeyboard()
                     }
                 
-                Text("FavMovies")
+                FeaturedMovies()
                     .tag(Tab.savedMovies)
                     .onTapGesture {
                         self.hideKeyboard()

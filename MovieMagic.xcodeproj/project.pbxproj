@@ -48,6 +48,7 @@
 		C126A6202A85311800F28F20 /* SearchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C126A61F2A85311800F28F20 /* SearchList.swift */; };
 		C126A6222A85317A00F28F20 /* MovieTheater.swift in Sources */ = {isa = PBXBuildFile; fileRef = C126A6212A85317A00F28F20 /* MovieTheater.swift */; };
 		C126A6272A8A910D00F28F20 /* TheaterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C126A6262A8A910D00F28F20 /* TheaterViewModel.swift */; };
+		C126A6292A8BC26900F28F20 /* ReviewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C126A6282A8BC26900F28F20 /* ReviewsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,8 @@
 		C126A61F2A85311800F28F20 /* SearchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchList.swift; sourceTree = "<group>"; };
 		C126A6212A85317A00F28F20 /* MovieTheater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTheater.swift; sourceTree = "<group>"; };
 		C126A6262A8A910D00F28F20 /* TheaterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterViewModel.swift; sourceTree = "<group>"; };
+		C126A6282A8BC26900F28F20 /* ReviewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsViewModel.swift; sourceTree = "<group>"; };
+		C126A62A2A8C5F4900F28F20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +128,7 @@
 		C126A5CF2A85241400F28F20 /* MovieMagic */ = {
 			isa = PBXGroup;
 			children = (
+				C126A62A2A8C5F4900F28F20 /* Info.plist */,
 				C126A61C2A852F9500F28F20 /* DataManager */,
 				C126A6192A852F7600F28F20 /* LocationManager */,
 				C126A5E42A852A0400F28F20 /* Views */,
@@ -205,6 +209,7 @@
 				C126A6092A852F1200F28F20 /* GenreViewModel.swift */,
 				C126A60B2A852F1F00F28F20 /* LocationViewModel.swift */,
 				C126A6262A8A910D00F28F20 /* TheaterViewModel.swift */,
+				C126A6282A8BC26900F28F20 /* ReviewsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 			files = (
 				C126A6162A852F5700F28F20 /* Genre.swift in Sources */,
 				C126A61E2A852FA400F28F20 /* DataManager.swift in Sources */,
+				C126A6292A8BC26900F28F20 /* ReviewsViewModel.swift in Sources */,
 				C126A6142A852F4E00F28F20 /* User.swift in Sources */,
 				C126A5F62A852E3A00F28F20 /* MovieCardTypeB.swift in Sources */,
 				C126A5EE2A852DFF00F28F20 /* ReviewComponent.swift in Sources */,
@@ -489,6 +495,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MovieMagic/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MovieMagic/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -517,6 +524,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MovieMagic/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MovieMagic/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

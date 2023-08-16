@@ -13,6 +13,8 @@ struct AddReview: View {
     @State private var reviewTitle: String = ""
     @State private var rating = 0
     
+    @ObservedObject var reviewsViewModel = ReviewsViewModel()
+    
     enum FocusField {
         case reviewContentField,reviewTitleField
     }
@@ -23,7 +25,7 @@ struct AddReview: View {
         NavigationView {
             List {
                 MovieHeader(movie: movie)
-            
+                
                 VStack(alignment: .leading, spacing: 0) {
                     CustomLable(labelText: "Rating")
                     
@@ -31,7 +33,7 @@ struct AddReview: View {
                         .padding(.top, 15)
                     
                 }.listRowSeparator(.hidden)
-                .padding(5)
+                    .padding(5)
                 
                 VStack(alignment: .leading, spacing: 0) {
                     CustomLable(labelText: "Review Title")
@@ -42,15 +44,15 @@ struct AddReview: View {
                         .padding(.top, 8)
                         .padding()
                         .overlay(
-                              RoundedRectangle(cornerRadius: 8)
-                                  .stroke(Color.black, lineWidth: 1)
-                          )
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.black, lineWidth: 1)
+                        )
                     
                 }.listRowSeparator(.hidden)
-                .padding(10)
-
-    
-               VStack(alignment: .leading, spacing: 0) {
+                    .padding(10)
+                
+                
+                VStack(alignment: .leading, spacing: 0) {
                     CustomLable(labelText: "Review Description")
                     
                     ZStack {
@@ -64,11 +66,23 @@ struct AddReview: View {
                     .padding(.top, 10)
                     
                 }.listRowSeparator(.hidden)
-                .padding(10)
+                    .padding(10)
                 
-                Button(action: {}) {
+                Button(action: {
+                    let newReview = MovieReview(
+                        id: 0,
+                        movieId:movie.id,
+                        userName: "John",
+                        email: "john@example.com",
+                        rating: rating,
+                        review: reviewContent,
+                        reviewTitle: reviewTitle
+                    )
+                    
+                    reviewsViewModel.submitReview(review: newReview)
+                }) {
                     HStack {
-                   
+                        
                         Text("SAVE")
                             .bold()
                             .foregroundColor(.white)
@@ -107,9 +121,9 @@ struct AddReview: View {
             .padding()
         }
         .navigationViewStyle(.stack)
-        .onTapGesture {
-            self.hideKeyboard()
-        }
+        //        .onTapGesture {
+        //            self.hideKeyboard()
+        //        }
     }
 }
 

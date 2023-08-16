@@ -3,7 +3,8 @@
 <plist version="1.0">
 <dict>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>We use your location to provide you with movie recommendations and showtimes near your current location.</string>
+    <string>We need your location to provide relevant information based on your current location.</string>
+
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict/>

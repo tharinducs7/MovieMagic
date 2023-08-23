@@ -12,10 +12,11 @@ struct TrendingList: View {
     @State private var selectedMovie: Movie?
     @StateObject private var movieVM = MoviesViewModel()
     
+   
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
-                ForEach(movieVM.movies) { movie in
+                ForEach(movieVM.trendingMovies) { movie in
                     GeometryReader { geometry in
                         MovieCardTypeB(movie: movie)
                             .rotation3DEffect(

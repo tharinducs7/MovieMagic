@@ -126,14 +126,16 @@ struct MovieDetails: View {
                 .frame(maxWidth: .infinity)
                 
                 Button {
-                    
+                    isReviewSheetPresented = true
                 } label: {
-                    Label("Share", systemImage:"square.and.arrow.up")
+                    Label("Add Review", systemImage:"text.badge.plus")
                         .font(.callout)
                         .foregroundColor(.gray)
                 }
                 .frame(maxWidth: .infinity)
             }
+            .padding(.trailing, 10)
+            .padding(.leading, -20)
             
             Divider()
                 .padding(.top, 25)
@@ -148,31 +150,60 @@ struct MovieDetails: View {
                     Text(movie.plot)
                         .font(.callout)
                         .foregroundColor(.gray)
+                    
+                    Text("Movie Genre")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Text(movie.genre)
+                        .font(.callout)
+                        .foregroundColor(.gray)
+                        .padding(.leading, 20)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Text("Director")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Text(movie.director)
+                        .font(.callout)
+                        .foregroundColor(.gray)
+                        .padding(.leading, 20)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Text("Writer")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Text(movie.writer ?? "Unknown Writer")
+                        .font(.callout)
+                        .foregroundColor(.gray)
+                        .padding(.leading, 20)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Text("Actors")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Text(movie.actors ?? "Unknown Actors")
+                        .font(.callout)
+                        .foregroundColor(.gray)
+                        .padding(.leading, 20)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
                 }
                 .padding(.bottom, 15)
                 .padding(.top, 20)
             }
             
-            Button {
-                isReviewSheetPresented = true
-            } label: {
-                Text("Add Review")
-                    .font(.callout)
-                    .fontWeight(.semibold)
-                    .padding(.horizontal, 50)
-                    .padding(.vertical, 10)
-                    .background {
-                        Capsule()
-                            .fill(Color("Purple Dark"))
-                    }
-                    .foregroundColor(Color("Gold Light"))
-                    .fontDesign(.rounded)
-            }
-            .padding(.bottom, 15)
-            .sheet(isPresented: $isReviewSheetPresented, content: {
-                AddReview(movie: movie)
-            })
         }
+        .sheet(isPresented: $isReviewSheetPresented, content: {
+            AddReview(movie: movie)
+        })
         .padding(.top, 180)
         .padding([.horizontal, .top], 15)
         .offset(y: offsetAimation ? 0: 100)

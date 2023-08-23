@@ -22,6 +22,7 @@ struct Movie: Identifiable, Codable {
     var country: String?
     var poster: String
     var reviews: [MovieReview]?
+    var trendingScore: Double?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -38,6 +39,7 @@ struct Movie: Identifiable, Codable {
         case country
         case poster
         case reviews
+        case trendingScore
     }
 }
 

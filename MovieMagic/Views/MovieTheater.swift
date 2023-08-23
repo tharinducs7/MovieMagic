@@ -92,36 +92,70 @@ struct MovieTheater: View {
                     )
 
                     HStack {
-                        Button("Zoom In") {
+                        Button(action: {
                             let span = region.span
                             let newSpan = MKCoordinateSpan(
                                 latitudeDelta: span.latitudeDelta * 0.8,
                                 longitudeDelta: span.longitudeDelta * 0.8
                             )
                             region.span = newSpan
+                        }) {
+                            Image(systemName: "plus.magnifyingglass")
+                            Text("Zoom In")
                         }
                         .padding()
 
-                        Button("Zoom Out") {
+                        Button(action: {
                             let span = region.span
                             let newSpan = MKCoordinateSpan(
                                 latitudeDelta: span.latitudeDelta * 1.25,
                                 longitudeDelta: span.longitudeDelta * 1.25
                             )
                             region.span = newSpan
+                        }) {
+                            Image(systemName: "minus.magnifyingglass")
+                            Text("Zoom Out")
                         }
                         .padding()
                     }
 
-                    Text("Nearest Theater: \(nearestTheater?.name ?? "None")")
+
+                    HStack {
+                        Text("Nearest Theater")
+                            .fontDesign(.rounded)
+                        
+                        Spacer()
+                        
+                        Text("📍 \(nearestTheater?.name ?? "None")")
+                            .fontDesign(.rounded)
+                       
+                    }
+                    .onTapGesture {
+                        if let nearestTheater = nearestTheater {
+                               selectedTheater = nearestTheater
+                               updateMapRegion(for: nearestTheater)
+                           }
+                    }
+                    .padding(20)
+                    
                 }
 
+              
                 List(theaters, id: \.id) { theater in
-                    Text(theater.name)
-                        .onTapGesture {
-                            selectedTheater = theater
-                            updateMapRegion(for: theater)
-                        }
+                    HStack(spacing: 20) {
+                        Text(theater.name)
+                        
+                        Spacer()
+                        
+                        Text( selectedTheater == theater ?
+                              "🍿":  "🎬")
+                    }
+                    .onTapGesture {
+                        selectedTheater = theater
+                        updateMapRegion(for: theater)
+                    }
+               
+                    
                 }
                 .listStyle(PlainListStyle())
                // .frame(width: infinity)

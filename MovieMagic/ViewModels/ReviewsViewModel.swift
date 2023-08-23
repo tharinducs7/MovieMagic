@@ -41,7 +41,7 @@ final class ReviewsViewModel: ObservableObject {
             let encoder = JSONEncoder()
            // encoder.keyEncodingStrategy = .convertToSnakeCase
             let reviewData = try encoder.encode(review)
-            
+            print(review)
             request.httpBody = reviewData
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             

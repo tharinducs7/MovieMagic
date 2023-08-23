@@ -71,6 +71,9 @@ struct SearchList: View {
                     }
                     .coordinateSpace(name: "LISTVIEW")
                     .padding(.top, 15)
+                    .refreshable {
+                      movieVM.refreshData()
+                    }
                 }
             }
             

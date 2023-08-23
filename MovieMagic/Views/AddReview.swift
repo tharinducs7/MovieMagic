@@ -12,8 +12,9 @@ struct AddReview: View {
     @State private var reviewContent: String = ""
     @State private var reviewTitle: String = ""
     @State private var rating = 0
-    
+    @StateObject private var movieVM = MoviesViewModel()
     @ObservedObject var reviewsViewModel = ReviewsViewModel()
+    @State private var user: User? = DataManager.shared.getUser()
     
     enum FocusField {
         case reviewContentField,reviewTitleField
@@ -69,17 +70,25 @@ struct AddReview: View {
                     .padding(10)
                 
                 Button(action: {
-                    let newReview = MovieReview(
-                        id: 0,
-                        movieId:movie.id,
-                        userName: "John",
-                        email: "john@example.com",
-                        rating: rating,
-                        review: reviewContent,
-                        reviewTitle: reviewTitle
-                    )
                     
-                    reviewsViewModel.submitReview(review: newReview)
+                    if let userName = user?.name, let userEmail = user?.email {
+                        let newReview = MovieReview(
+                            id: 0,
+                            movieId: movie.id,
+                            userName: userName,
+                            email: userEmail,
+                            rating: rating,
+                            review: reviewContent,
+                            reviewTitle: reviewTitle
+                        )
+                        
+                        reviewsViewModel.submitReview(review: newReview)
+                    } else {
+                        // Handle the case where user's name or email is nil
+                    }
+                    
+                   
+                  
                 }) {
                     HStack {
                         

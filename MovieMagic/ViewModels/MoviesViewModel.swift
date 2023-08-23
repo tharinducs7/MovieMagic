@@ -10,10 +10,12 @@ import Foundation
 
 final class MoviesViewModel: ObservableObject {
     @Published var movies: [Movie] = []
+    @Published var trendingMovies: [Movie] = []
     @Published var selectedGenre: String = "Action"
     
     init() {
         fetchMovies()
+        fetchTrendingMovies()
     }
     
     func fetchMovies() {
@@ -91,5 +93,33 @@ final class MoviesViewModel: ObservableObject {
                 print("Error decoding data: \(error)")
             }
         }.resume()
+    }
+    
+    func fetchTrendingMovies() {
+        URLSession.shared.dataTask(with: MovieConstants.trendingMoviesURL) { [weak self] data, response, error in
+            guard let data = data else { return }
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                
+                let decodedData = try decoder.decode([Movie].self, from: data)
+                
+                DispatchQueue.main.async {
+                    self?.trendingMovies = decodedData
+                    DataManager.shared.setTredingMovies(decodedData) // Update DataManager with new data
+                }
+            } catch {
+                print("Error decoding data: \(error)")
+            }
+        }.resume()
+    }
+    
+    func refreshData() {
+        print("refreshing........")
+        self.movies = [] // Clear existing movies
+        self.trendingMovies = [] // Clear existing trending movies
+        fetchMovies()
+        fetchTrendingMovies()
+        // You can also add other data fetching calls here if needed.
     }
 }

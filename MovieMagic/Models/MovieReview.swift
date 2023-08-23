@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MovieReview: Identifiable, Codable {
     let id: Int
-    let movieId: Int
+    let movieId: Int?
     let userName: String
     let email: String
     let rating: Int

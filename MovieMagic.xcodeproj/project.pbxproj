@@ -13,6 +13,8 @@
 		1375A0A92A8B161C004E1DCC /* MovieDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1375A0A82A8B161C004E1DCC /* MovieDetails.swift */; };
 		1375A0AB2A8B16B8004E1DCC /* AddReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1375A0AA2A8B16B8004E1DCC /* AddReview.swift */; };
 		1375A0AD2A8B1707004E1DCC /* FavoriteMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1375A0AC2A8B1707004E1DCC /* FavoriteMovies.swift */; };
+		5CC1AC3A2A926F1800B4B41C /* OnBoarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC1AC392A926F1800B4B41C /* OnBoarding.swift */; };
+		5CC1AC3E2A94E81F00B4B41C /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC1AC3D2A94E81F00B4B41C /* SplashScreen.swift */; };
 		C126A5D12A85241400F28F20 /* MovieMagicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C126A5D02A85241400F28F20 /* MovieMagicApp.swift */; };
 		C126A5D32A85241400F28F20 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C126A5D22A85241400F28F20 /* ContentView.swift */; };
 		C126A5D52A85241600F28F20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C126A5D42A85241600F28F20 /* Assets.xcassets */; };
@@ -58,6 +60,8 @@
 		1375A0A82A8B161C004E1DCC /* MovieDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetails.swift; sourceTree = "<group>"; };
 		1375A0AA2A8B16B8004E1DCC /* AddReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReview.swift; sourceTree = "<group>"; };
 		1375A0AC2A8B1707004E1DCC /* FavoriteMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovies.swift; sourceTree = "<group>"; };
+		5CC1AC392A926F1800B4B41C /* OnBoarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoarding.swift; sourceTree = "<group>"; };
+		5CC1AC3D2A94E81F00B4B41C /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		C126A5CD2A85241400F28F20 /* MovieMagic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieMagic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C126A5D02A85241400F28F20 /* MovieMagicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieMagicApp.swift; sourceTree = "<group>"; };
 		C126A5D22A85241400F28F20 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -235,6 +239,8 @@
 				1375A0A82A8B161C004E1DCC /* MovieDetails.swift */,
 				1375A0AA2A8B16B8004E1DCC /* AddReview.swift */,
 				1375A0AC2A8B1707004E1DCC /* FavoriteMovies.swift */,
+				5CC1AC392A926F1800B4B41C /* OnBoarding.swift */,
+				5CC1AC3D2A94E81F00B4B41C /* SplashScreen.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -349,11 +355,13 @@
 				C126A5EA2A852DE200F28F20 /* MoviePoster.swift in Sources */,
 				C126A6002A852EBA00F28F20 /* Constants.swift in Sources */,
 				C126A6182A852F6100F28F20 /* Theater.swift in Sources */,
+				5CC1AC3A2A926F1800B4B41C /* OnBoarding.swift in Sources */,
 				073D59A82A8A80480083FD43 /* FeaturedMovies.swift in Sources */,
 				C126A5FC2A852E8200F28F20 /* MovieHeader.swift in Sources */,
 				1375A0AD2A8B1707004E1DCC /* FavoriteMovies.swift in Sources */,
 				C126A5FA2A852E5600F28F20 /* TrendingList.swift in Sources */,
 				C126A5D32A85241400F28F20 /* ContentView.swift in Sources */,
+				5CC1AC3E2A94E81F00B4B41C /* SplashScreen.swift in Sources */,
 				C126A6272A8A910D00F28F20 /* TheaterViewModel.swift in Sources */,
 				C126A5FE2A852EAA00F28F20 /* HideKeyboard.swift in Sources */,
 				073D59A22A8A7F7A0083FD43 /* Home.swift in Sources */,

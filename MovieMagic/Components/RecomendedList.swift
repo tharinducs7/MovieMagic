@@ -1,26 +1,26 @@
 //
-//  TrendingList.swift
+//  RecomendedList.swift
 //  MovieMagic
 //
-//  Created by Tharindu Senadheera on 8/7/23.
+//  Created by Tharindu Senadheera on 8/25/23.
 //
 
 import SwiftUI
 
-struct FavoriteList: View {
-    
+struct RecomendedList: View {
     @State private var selectedMovie: Movie?
     @StateObject private var movieVM = MoviesViewModel()
     @State private var user: User? = DataManager.shared.getUser()
+    
     
     var body: some View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Favorite Movies")
+                    Text("Based on Personal Preferences")
                         .font(.headline)
                         .fontDesign(.rounded)
-
+                    
                 }
                 
                 Spacer()
@@ -33,7 +33,7 @@ struct FavoriteList: View {
             ScrollView(.horizontal, showsIndicators: false) {
 
                 HStack(spacing: 50) {
-                    ForEach(movieVM.favoriteMovies) { movie in
+                    ForEach(filteredMovies) { movie in
                         GeometryReader { geometry in
                             
                             let x = geometry.frame(in: .global).minX
@@ -76,11 +76,22 @@ struct FavoriteList: View {
         return scale
     }
     
+    var filteredMovies: [Movie] {
+           guard let user = user else {
+               return []
+           }
+    
+        return movieVM.movies.filter { movie in
+               let movieGenres = movie.genre.components(separatedBy: ",")
+               return !Set(movieGenres).isDisjoint(with: user.favoriteGenres)
+           }
+       }
+
     
 }
 
-struct FavoriteList_Previews: PreviewProvider {
+struct RecomendedList_Previews: PreviewProvider {
     static var previews: some View {
-        TrendingList()
+        RecomendedList()
     }
 }

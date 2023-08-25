@@ -50,6 +50,8 @@ struct Home: View {
                         
                     
                     FavoriteList()
+                    
+                    RecomendedList()
                 }
                
                     

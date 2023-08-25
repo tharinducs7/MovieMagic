@@ -11,12 +11,11 @@ struct MovieCardTypeB: View {
     var movie: Movie
     @Namespace private var animation
     @State private var isSheetPresented = false
-//    var selectedMovie: Movie?
     
     var body: some View {
         VStack(spacing: 0.0){
             VStack(spacing: 4.0){
-           
+                
             }
             .padding(EdgeInsets(top: 20, leading: 30, bottom: 0, trailing: 30))
             .frame(width: 150, height: 125, alignment: .top)
@@ -33,13 +32,12 @@ struct MovieCardTypeB: View {
         .font(.footnote)
         .shadow(radius: 10)
         .sheet(isPresented: $isSheetPresented) {
-           
-                MovieDetails(show: $isSheetPresented, animation: animation, movie: movie)
-                    .transition(.asymmetric(insertion: .identity, removal: .offset(y: 5)))
+            MovieDetails(show: $isSheetPresented, animation: animation, movie: movie)
+                .transition(.asymmetric(insertion: .identity, removal: .offset(y: 5)))
             
         }
         .onTapGesture {
-                   isSheetPresented.toggle()
+            isSheetPresented.toggle()
         }
         
     }

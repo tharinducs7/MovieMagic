@@ -110,6 +110,7 @@ struct MovieDetails: View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
                 Button {
+                    updateFavToggle()
                     isViewReviewsSheetPresented = true
                   
                 } label: {
@@ -118,30 +119,31 @@ struct MovieDetails: View {
                         .foregroundColor(.gray)
                 }
                 .sheet(isPresented: $isViewReviewsSheetPresented, content: {
-                    Reviews(movie: movie)
+                    if let movieById = movieVM.movieById {
+                           Reviews(movie: movieById)
+                    }
                 })
                 .frame(maxWidth: .infinity)
                 
                 Button {
-                   // checkIfEmailExists()
                     updateFavToggle()
                     
                     if let userEmail = user?.email {
-                       
                         if(!favToggle) {
                             movieVM.addFavoriteMovies(movieId: movie.id, email: userEmail)
-                           // self.favToggle = true
-                            
                             
                         } else {
                             movieVM.removeFavoriteMovies(movieId: movie.id, email: userEmail)
-                           // self.favToggle = false
                         }
                     }
                 } label: {
+                    Image(systemName: "heart.fill")
+                        .foregroundColor(checkIfEmailExists() ? .red : .gray)
                     Label("Favorite", systemImage: "suit.heart")
                         .font(.callout)
-                        .foregroundColor(checkIfEmailExists() ? .red : .gray)
+                        .labelStyle(.titleOnly)
+                        .foregroundColor(.gray)
+                   
                 }
                 .frame(maxWidth: .infinity)
                 
@@ -223,6 +225,9 @@ struct MovieDetails: View {
         }
         .sheet(isPresented: $isReviewSheetPresented, content: {
             AddReview(movie: movie)
+                .onTapGesture {
+                    self.hideKeyboard()
+                }
         })
         .padding(.top, 180)
         .padding([.horizontal, .top], 15)

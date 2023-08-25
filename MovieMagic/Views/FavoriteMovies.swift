@@ -66,9 +66,6 @@ struct FavoriteMovies: View {
                     if let userEmail = user?.email {
                         movieVM.fetchFavoritMoviesByUser(by: userEmail)
                     }
-                    
-                    print("Test eeee")
-
                 }
                 .refreshable {
                   movieVM.refreshData()

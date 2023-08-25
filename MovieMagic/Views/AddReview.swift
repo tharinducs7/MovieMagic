@@ -73,7 +73,24 @@ struct AddReview: View {
                     .padding(10)
                 
                 Button(action: {
-                    print("error")
+                }) {
+                    HStack {
+                        
+                        Text("SAVE")
+                            .bold()
+                            .foregroundColor(.white)
+                            .fontDesign(.rounded)
+                            .font(.title2)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(6)
+                    .background(Color("Purple"))
+                    .cornerRadius(10)
+                    .buttonStyle(.borderedProminent)
+                    .buttonBorderShape(.capsule)
+                    .controlSize(.large)
+                }
+                .onTapGesture {
                     if reviewContent.isEmpty || reviewTitle.isEmpty || rating == 0 {
                         showAlert = true
                         print("error")
@@ -92,29 +109,18 @@ struct AddReview: View {
                             )
                             
                             reviewsViewModel.submitReview(review: newReview)
+                            
+                            showAlert = true
+                            print("success")
+                            self.alertTtitle = "Thank You"
+                            self.alretMsg = "Thanks for taking time to review this movie!"
+                            
                         } else {
                             
                             print("test")
                             // Handle the case where user's name or email is nil
                         }
                     }
-                    
-                }) {
-                    HStack {
-                        
-                        Text("SAVE")
-                            .bold()
-                            .foregroundColor(.white)
-                            .fontDesign(.rounded)
-                            .font(.title2)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(6)
-                    .background(Color("Purple"))
-                    .cornerRadius(10)
-                    .buttonStyle(.borderedProminent)
-                    .buttonBorderShape(.capsule)
-                    .controlSize(.large)
                 }
                 .alert(isPresented: $showAlert) {
                        Alert(title: Text(alertTtitle),
@@ -146,9 +152,7 @@ struct AddReview: View {
             .padding()
         }
         .navigationViewStyle(.stack)
-//        .onTapGesture {
-//            self.hideKeyboard()
-//        }
+        
     }
 }
 

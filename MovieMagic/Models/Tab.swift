@@ -11,18 +11,18 @@ enum Tab: String, CaseIterable {
 case home = "Home"
 case list = "List"
 case savedMovies = "Liked"
-case about = "about"
+case about = "Theaters"
     
     var systemImage: String {
         switch self{
         case .home:
             return "house"
         case .list:
-            return "popcorn"
+            return "list.and.film"
         case .savedMovies:
             return "heart"
         case .about:
-            return "info"
+            return "popcorn.fill"
         }
     }
     

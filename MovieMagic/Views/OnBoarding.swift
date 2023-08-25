@@ -32,115 +32,123 @@ struct OnBoarding: View {
         if isActive {
             ContentView()
         }  else {
-            
-            VStack {
-                TabView(selection: $currentStep) {
-                    ForEach(0..<onBoardingSteps.count) { step in
-                        VStack {
-                            Image(onBoardingSteps[step].image)
-                                .resizable()
-                                .frame(width: 250, height: 250)
-                            
-                            Text(onBoardingSteps[step].title)
-                                .font(.title3)
-                                .bold()
-                            
-                            if currentStep == 2 {
-                                ScrollView(.horizontal) {
-                                    HStack(spacing: 10) {
-                                        ForEach(genreVM.genres) { genre in
-                                            GenreSelection(genre: genre, selectedGenres: $selectedGenres)
-                                                .animation(.default)
+            GeometryReader { geometry in
+                VStack {
+                    TabView(selection: $currentStep) {
+                        ForEach(0..<onBoardingSteps.count) { step in
+                            VStack {
+                                Image(onBoardingSteps[step].image)
+                                    .resizable()
+                                    .frame(width: 250, height: 250)
+                                
+                                Text(onBoardingSteps[step].title)
+                                    .font(.title3)
+                                    .bold()
+                                
+                                if currentStep == 2 {
+                                    ScrollView(.horizontal) {
+                                        HStack(spacing: 10) {
+                                            ForEach(genreVM.genres) { genre in
+                                                GenreSelection(genre: genre, selectedGenres: $selectedGenres)
+                                                    .animation(.default)
+                                            }
+                                        }
+                                    }
+                                    .padding(10)
+                                }
+                                
+                                if currentStep == 1 {
+                                    ScrollView {
+                                        VStack(alignment: .leading, spacing: 0) {
+                                            CustomLable(labelText: "User Name")
+                                                .padding(.bottom, 8)
+                                            
+                                            TextField("I am groot", text: $name)
+                                                .padding(.top, 8)
+                                                .padding()
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 8)
+                                                        .stroke(Color.black, lineWidth: 1)
+                                                )
+                                            
+                                        }.listRowSeparator(.hidden)
+                                            .padding(10)
+                                        
+                                        VStack(alignment: .leading, spacing: 0) {
+                                            CustomLable(labelText: "Email")
+                                                .padding(.bottom, 8)
+                                            
+                                            TextField("Enter Email Address", text: $email)
+                                                .padding(.top, 8)
+                                                .padding()
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 8)
+                                                        .stroke(Color.black, lineWidth: 1)
+                                                )
+                                            
+                                        }
+                                        .listRowSeparator(.hidden)
+                                        .padding(10)
+                                        .onChange(of: email) { newValue in
+                                            email = newValue.lowercased()
                                         }
                                     }
                                 }
-                                .padding(10)
-                            }
-                            
-                            if currentStep == 1 {
-                                VStack(alignment: .leading, spacing: 0) {
-                                    CustomLable(labelText: "User Name")
-                                        .padding(.bottom, 8)
-                                    
-                                    TextField("I am groot", text: $name)
-                                        .padding(.top, 8)
-                                        .padding()
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 8)
-                                                .stroke(Color.black, lineWidth: 1)
-                                        )
-                                    
-                                }.listRowSeparator(.hidden)
-                                    .padding(10)
                                 
-                                VStack(alignment: .leading, spacing: 0) {
-                                    CustomLable(labelText: "Email")
-                                        .padding(.bottom, 8)
-                                    
-                                    TextField("Enter Email Address", text: $email)
-                                        .padding(.top, 8)
-                                        .padding()
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 8)
-                                                .stroke(Color.black, lineWidth: 1)
-                                        )
-                                    
-                                }
-                                .listRowSeparator(.hidden)
-                                .padding(10)
-                                .onChange(of: email) { newValue in
-                                    email = newValue.lowercased()
-                                }
+                                Text(onBoardingSteps[step].description)
+                                    .multilineTextAlignment(.center)
+                                    .padding(.horizontal, 32)
+                                    .padding(.top, 16)
                                 
                             }
-                            
-                            Text(onBoardingSteps[step].description)
-                                .multilineTextAlignment(.center)
-                                .padding(.horizontal, 32)
-                                .padding(.top, 16)
-                            
-                        }
-                        .tag(step)
-                    }
-                    
-                }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                
-                Spacer()
-                
-                Button(action: {
-                    if self.currentStep < onBoardingSteps.count - 1 {
-                        self.currentStep += 1
-                    } else {
-                        var newUser: User = User(id: UUID(), name: name, email: email, favoriteGenres: Array(selectedGenres))
-                        
-                        DataManager.shared.setUser(newUser)
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                            withAnimation(.spring()) {
-                                self.isActive = true
-                            }
+                            .tag(step)
                         }
                         
                     }
-                }) {
-                    Text(currentStep < onBoardingSteps.count - 1 ? "Next" : "Get Started")
-                        .padding(16)
-                        .frame(maxWidth:.infinity)
-                        .background(disableCheck() ? Color("Purple").opacity(0.4) :Color("Purple"))
-                        .cornerRadius(16)
-                        .padding(.horizontal, 16)
-                        .foregroundColor(.white)
+                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        if self.currentStep < onBoardingSteps.count - 1 {
+                            self.currentStep += 1
+                        } else {
+                            var newUser: User = User(id: UUID(), name: name, email: email, favoriteGenres: Array(selectedGenres))
+                            
+                            DataManager.shared.setUser(newUser)
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                withAnimation(.spring()) {
+                                    self.isActive = true
+                                }
+                            }
+                            
+                        }
+                    }) {
+                        Text(currentStep < onBoardingSteps.count - 1 ? "Next" : "Get Started")
+                            .padding(16)
+                            .frame(maxWidth:.infinity)
+                            .background(disableCheck() ? Color("Purple").opacity(0.4) :Color("Purple"))
+                            .cornerRadius(16)
+                            .padding(.horizontal, 16)
+                            .foregroundColor(.white)
+                        
+                    }
+                    .disabled(disableCheck())
                     
                 }
-                .disabled(disableCheck())
                 
+                .frame(minHeight: geometry.size.height) // Ensure the VStack takes up at least the available height
+                .padding(.bottom, geometry.safeAreaInsets.bottom)
+            }
+            .onTapGesture {
+                self.hideKeyboard()
             }
         }
     }
     
     func disableCheck() -> Bool {
-        if(currentStep == 1) {
+        if(currentStep == 1 || currentStep == 2) {
             if(name.isEmpty || email.isEmpty) {
                 return true
             } else {

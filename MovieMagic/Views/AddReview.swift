@@ -15,6 +15,9 @@ struct AddReview: View {
     @StateObject private var movieVM = MoviesViewModel()
     @ObservedObject var reviewsViewModel = ReviewsViewModel()
     @State private var user: User? = DataManager.shared.getUser()
+    @State private var showAlert = false
+    @State private var alertTtitle: String = ""
+    @State private var alretMsg: String = ""
     
     enum FocusField {
         case reviewContentField,reviewTitleField
@@ -70,25 +73,32 @@ struct AddReview: View {
                     .padding(10)
                 
                 Button(action: {
-                    
-                    if let userName = user?.name, let userEmail = user?.email {
-                        let newReview = MovieReview(
-                            id: 0,
-                            movieId: movie.id,
-                            userName: userName,
-                            email: userEmail,
-                            rating: rating,
-                            review: reviewContent,
-                            reviewTitle: reviewTitle
-                        )
-                        
-                        reviewsViewModel.submitReview(review: newReview)
+                    print("error")
+                    if reviewContent.isEmpty || reviewTitle.isEmpty || rating == 0 {
+                        showAlert = true
+                        print("error")
+                        self.alertTtitle = "Validation Error"
+                        self.alretMsg = "Please fill in all the required fields."
                     } else {
-                        // Handle the case where user's name or email is nil
+                        if let userName = user?.name, let userEmail = user?.email {
+                            let newReview = MovieReview(
+                                id: 0,
+                                movieId: movie.id,
+                                userName: userName,
+                                email: userEmail,
+                                rating: rating,
+                                review: reviewContent,
+                                reviewTitle: reviewTitle
+                            )
+                            
+                            reviewsViewModel.submitReview(review: newReview)
+                        } else {
+                            
+                            print("test")
+                            // Handle the case where user's name or email is nil
+                        }
                     }
                     
-                   
-                  
                 }) {
                     HStack {
                         
@@ -106,7 +116,13 @@ struct AddReview: View {
                     .buttonBorderShape(.capsule)
                     .controlSize(.large)
                 }
+                .alert(isPresented: $showAlert) {
+                       Alert(title: Text(alertTtitle),
+                             message: Text(alretMsg),
+                             dismissButton: .default(Text("OK")))
+                   }
                 .padding(10)
+               
             }
             .toolbar{
                 ToolbarItem(placement: .keyboard){
@@ -130,9 +146,9 @@ struct AddReview: View {
             .padding()
         }
         .navigationViewStyle(.stack)
-        //        .onTapGesture {
-        //            self.hideKeyboard()
-        //        }
+//        .onTapGesture {
+//            self.hideKeyboard()
+//        }
     }
 }
 

@@ -16,8 +16,9 @@ final class DataManager {
     private let theatersKey = "theaters"
     private let reviewsKey = "reviews"
     private let trendingMoviesKey = "tredingMovies"
+    private let favoriteMoviesKey = "favoriteMovies"
     private let userKey = "userKey"
-    
+    private let movieById = "movieById"
     // MARK: - Movies
     
     func getMovies() -> [Movie] {
@@ -67,6 +68,33 @@ final class DataManager {
             encoder.keyEncodingStrategy = .convertToSnakeCase
             let data = try encoder.encode(movies)
             userDefaults.set(data, forKey: trendingMoviesKey)
+        } catch {
+            print("Error encoding data: \(error)")
+        }
+    }
+    
+    // MARK: - Favorite Movies
+    
+    func getFavoriteMovies() -> [Movie] {
+        guard let data = userDefaults.data(forKey: favoriteMoviesKey) else {
+            return []
+        }
+        do {
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            return try decoder.decode([Movie].self, from: data)
+        } catch {
+            print("Error decoding data: \(error)")
+            return []
+        }
+    }
+
+    func setFavoriteMovies(_ movies: [Movie]) {
+        do {
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            let data = try encoder.encode(movies)
+            userDefaults.set(data, forKey: favoriteMoviesKey)
         } catch {
             print("Error encoding data: \(error)")
         }
@@ -176,6 +204,33 @@ final class DataManager {
             encoder.keyEncodingStrategy = .convertToSnakeCase
             let data = try encoder.encode(user)
             userDefaults.set(data, forKey: userKey)
+        } catch {
+            print("Error encoding data: \(error)")
+        }
+    }
+    
+    // MARK: - Movie By Id
+    
+    func getMovieById() -> Movie? {
+        guard let data = userDefaults.data(forKey: movieById) else {
+            return nil
+        }
+        do {
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            return try decoder.decode(Movie.self, from: data)
+        } catch {
+            print("Error decoding data: \(error)")
+            return nil
+        }
+    }
+
+    func setMovieById(_ movie: Movie) {
+        do {
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            let data = try encoder.encode(movie)
+            userDefaults.set(data, forKey: movieById)
         } catch {
             print("Error encoding data: \(error)")
         }

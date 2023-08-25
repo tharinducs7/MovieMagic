@@ -32,7 +32,7 @@ struct MovieCardTypeB: View {
             }
             
         }
-        .frame(height: 260)
+        .frame(height: 350)
         .font(.footnote)
         .shadow(radius: 10)
     }

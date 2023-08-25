@@ -17,7 +17,10 @@ struct MovieDetails: View {
     @State private var offsetAimation: Bool = false
     @State private var isReviewSheetPresented = false
     @State private var isViewReviewsSheetPresented = false
-
+    @StateObject private var movieVM = MoviesViewModel()
+    @State private var user: User? = DataManager.shared.getUser()
+    @State private var favToggle: Bool = false
+    
     var body: some View {
         VStack(spacing: 15) {
             Button {
@@ -97,6 +100,8 @@ struct MovieDetails: View {
                 withAnimation(.easeInOut(duration: 0.35).delay(0.1)) {
                     offsetAimation = true
                 }
+                
+                movieVM.fetchMovieByID(by: movie.id)
             }
     }
     
@@ -106,6 +111,7 @@ struct MovieDetails: View {
             HStack(spacing: 0) {
                 Button {
                     isViewReviewsSheetPresented = true
+                  
                 } label: {
                     Label("Reviews", systemImage:"text.alignleft")
                         .font(.callout)
@@ -117,11 +123,25 @@ struct MovieDetails: View {
                 .frame(maxWidth: .infinity)
                 
                 Button {
+                   // checkIfEmailExists()
+                    updateFavToggle()
                     
+                    if let userEmail = user?.email {
+                       
+                        if(!favToggle) {
+                            movieVM.addFavoriteMovies(movieId: movie.id, email: userEmail)
+                           // self.favToggle = true
+                            
+                            
+                        } else {
+                            movieVM.removeFavoriteMovies(movieId: movie.id, email: userEmail)
+                           // self.favToggle = false
+                        }
+                    }
                 } label: {
-                    Label("Favorite", systemImage:"suit.heart")
+                    Label("Favorite", systemImage: "suit.heart")
                         .font(.callout)
-                        .foregroundColor(.gray)
+                        .foregroundColor(checkIfEmailExists() ? .red : .gray)
                 }
                 .frame(maxWidth: .infinity)
                 
@@ -208,6 +228,17 @@ struct MovieDetails: View {
         .padding([.horizontal, .top], 15)
         .offset(y: offsetAimation ? 0: 100)
         .opacity(offsetAimation ? 1: 0)
+    }
+    
+    func checkIfEmailExists() -> Bool {
+        let userEmail = user?.email ?? ""
+        let favoriteMovies = movieVM.movieById?.favorites ?? []
+        movieVM.fetchMovieByID(by: movie.id)
+        return favoriteMovies.contains(userEmail)
+    }
+    
+    func updateFavToggle() {
+        self.favToggle = checkIfEmailExists()
     }
 }
 

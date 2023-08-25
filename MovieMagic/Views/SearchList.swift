@@ -56,6 +56,7 @@ struct SearchList: View {
                                         withAnimation(.easeInOut(duration: 0.2)) {
                                             animateCurrentMovie = true
                                             selectedMovie = movie
+                                            movieVM.fetchMovieByID(by: movie.id)
                                         }
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
                                             withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.7)) {
@@ -78,9 +79,8 @@ struct SearchList: View {
             }
             
             .overlay(content: {
-                if let selectedMovie, showDetailView {
-                    MovieDetails(show:$showDetailView, animation: animation, movie: selectedMovie)
-                    // for more fluent animation
+                if let selectedMovie = movieVM.movieById, showDetailView {
+                    MovieDetails(show: $showDetailView, animation: animation, movie: selectedMovie)
                         .transition(.asymmetric(insertion: .identity, removal: .offset(y: 5)))
                 }
                 

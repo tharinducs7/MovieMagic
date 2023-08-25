@@ -10,25 +10,19 @@ import SwiftUI
 
 struct FeaturedMovies: View {
     @StateObject private var movieVM = MoviesViewModel()
-
+    @State private var user: User? = DataManager.shared.getUser()
     var body: some View {
            GeometryReader { geometry in
                ScrollView {
                    VStack {
-                       Text("Featured List")
-                           .font(.title3)
-                           .fontWeight(.semibold)
-                           .frame(maxWidth: .infinity, alignment: .leading)
-                           .padding([.leading, .top], 20)
-                           
-                       TrendingList()
-                       
+                       FavoriteList()
                    }
                    .frame(width: geometry.size.width, height: geometry.size.height)
                }
                .refreshable {
                  movieVM.refreshData()
                }
+              
            }
        }
 }

@@ -1,12 +1,13 @@
 {
   "images" : [
     {
-      "filename" : "New Project.jpg",
+      "filename" : "New Project 1.jpg",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
     },
     {
+      "filename" : "New Project.jpg",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"

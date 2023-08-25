@@ -15,8 +15,8 @@ struct OnBoardingStep {
 
 private let onBoardingSteps = [
     OnBoardingStep(image: "logo", title: "Who we are?", description: "Discover and save your favorite movies with a convenient app. Find films from different genres and easily mark them as favorites for future enjoyment. Your personal movie guide for creating a go-to list of top picks."),
-    OnBoardingStep(image: "logo", title: "So, who are you?", description: "Share your username and email so we can assist you properly, like getting to know you in the online world."),
-    OnBoardingStep(image: "logo", title: "Which genres are you into the most?", description: "We want to know your favorite movie types, like action, romance, horror, and more. It's like asking which flavors you like best from a big buffet of movies")
+    OnBoardingStep(image: "groot", title: "So, who are you?", description: "Share your username and email so we can assist you properly, like getting to know you in the online world."),
+    OnBoardingStep(image: "poster", title: "Which genres are you into the most?", description: "We want to know your favorite movie types, like action, romance, horror, and more. It's like asking which flavors you like best from a big buffet of movies")
 ]
 
 struct OnBoarding: View {
@@ -62,7 +62,7 @@ struct OnBoarding: View {
                                     CustomLable(labelText: "User Name")
                                         .padding(.bottom, 8)
                                     
-                                    TextField("Enter user name", text: $name)
+                                    TextField("I am groot", text: $name)
                                         .padding(.top, 8)
                                         .padding()
                                         .overlay(
@@ -85,8 +85,12 @@ struct OnBoarding: View {
                                                 .stroke(Color.black, lineWidth: 1)
                                         )
                                     
-                                }.listRowSeparator(.hidden)
-                                    .padding(10)
+                                }
+                                .listRowSeparator(.hidden)
+                                .padding(10)
+                                .onChange(of: email) { newValue in
+                                    email = newValue.lowercased()
+                                }
                                 
                             }
                             
@@ -117,21 +121,45 @@ struct OnBoarding: View {
                                 self.isActive = true
                             }
                         }
-                            
+                        
                     }
                 }) {
                     Text(currentStep < onBoardingSteps.count - 1 ? "Next" : "Get Started")
                         .padding(16)
                         .frame(maxWidth:.infinity)
-                        .background(Color("Purple"))
+                        .background(disableCheck() ? Color("Purple").opacity(0.4) :Color("Purple"))
                         .cornerRadius(16)
                         .padding(.horizontal, 16)
                         .foregroundColor(.white)
                     
                 }
+                .disabled(disableCheck())
                 
             }
         }
+    }
+    
+    func disableCheck() -> Bool {
+        if(currentStep == 1) {
+            if(name.isEmpty || email.isEmpty) {
+                return true
+            } else {
+                if isValidEmail(email) {
+                    return false
+                } else {
+                    return true
+                }
+                
+            }
+        } else {
+            return false
+        }
+    }
+    
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegex = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: email)
     }
 }
 

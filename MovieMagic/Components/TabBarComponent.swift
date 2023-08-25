@@ -33,7 +33,7 @@ struct TabBarComponent: View {
                         self.hideKeyboard()
                     }
                 
-                FeaturedMovies()
+                FavoriteMovies()
                     .tag(Tab.savedMovies)
                     .onTapGesture {
                         self.hideKeyboard()

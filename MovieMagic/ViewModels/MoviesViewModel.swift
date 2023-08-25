@@ -228,25 +228,16 @@ final class MoviesViewModel: ObservableObject {
         }.resume()
     }
   
-//    func checkIfEmailExists() -> Bool {
-//        let userEmail = user?.email ?? ""
-//       // let favoriteMovies = movie.favorites ?? []
-//
-////        if(favoriteMovies.contains(userEmail)) {
-////            self.favToggle = true
-////        } else {
-////            self.favToggle = false
-////        }
-//
-//      //  return favoriteMovies.contains(userEmail)
-//    }
-
     func refreshData() {
         print("refreshing........")
         self.movies = [] // Clear existing movies
         self.trendingMovies = [] // Clear existing trending movies
+        self.favoriteMovies = []
+        self.movieById = nil
+        
         fetchMovies()
         fetchTrendingMovies()
+        
         if let userEmail = user?.email {
             fetchFavoritMoviesByUser(by: userEmail)
         }

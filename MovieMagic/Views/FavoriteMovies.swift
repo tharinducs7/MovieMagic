@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct FavoriteMovies: View {
-    var movies: [Movie]
+  //  var movies: [Movie]
     @Namespace private var animation
-    
+    @StateObject private var movieVM = MoviesViewModel()
     @State private var showDetailView: Bool = false
     @State private var selectedMovie: Movie?
     @State private var animateCurrentMovie: Bool = false
+    @State private var user: User? = DataManager.shared.getUser()
     
     var body: some View {
         VStack(spacing: 15) {
@@ -39,7 +40,7 @@ struct FavoriteMovies: View {
                 
                 ScrollView(.vertical, showsIndicators: false)  {
                     VStack(spacing: 35) {
-                            ForEach(movies) { movie in
+                        ForEach(movieVM.favoriteMovies) { movie in
                                 MovieCardTypeA(movie: movie, showDetailView: showDetailView, selectedMovie: movie)
                                     .onTapGesture {
                                         withAnimation(.easeInOut(duration: 0.2)) {
@@ -61,7 +62,19 @@ struct FavoriteMovies: View {
                 }
                 .coordinateSpace(name: "LISTVIEW")
                 .padding(.top, 15)
+                .onAppear() {
+                    if let userEmail = user?.email {
+                        movieVM.fetchFavoritMoviesByUser(by: userEmail)
+                    }
+                    
+                    print("Test eeee")
+
+                }
+                .refreshable {
+                  movieVM.refreshData()
+                }
             }
+            
         }
         .overlay(content: {
             if let selectedMovie, showDetailView {
@@ -69,6 +82,7 @@ struct FavoriteMovies: View {
                 .transition(.asymmetric(insertion: .identity, removal: .offset(y: 5)))
             }
         })
+       
     }
     
     func bottomPadding(_ size: CGSize = .zero) -> CGFloat {
@@ -81,7 +95,7 @@ struct FavoriteMovies: View {
 
 struct FavoriteMovies_Previews: PreviewProvider {
     static var previews: some View {
-        FavoriteMovies(movies: sampleMovies)
+        FavoriteMovies()
     }
 }
 

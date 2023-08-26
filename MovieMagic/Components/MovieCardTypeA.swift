@@ -13,6 +13,7 @@ struct MovieCardTypeA: View {
     @Namespace private var animation
     var showDetailView: Bool
     var selectedMovie: Movie?
+   
     
     var body: some View {
         GeometryReader {
@@ -34,8 +35,12 @@ struct MovieCardTypeA: View {
                         .font(.caption)
                         .foregroundColor(.gray)
                     
-                    MovieRating(rating: 4)
-                        .padding(.top, 10)
+                    if let reviewAverage = movie.reviewAverage {
+                        let roundedRating = Int(reviewAverage.rounded())
+                        MovieRating(rating: roundedRating)
+                            .padding(.top, 10)
+                        
+                    }
                     
                     Spacer(minLength: 10)
                     

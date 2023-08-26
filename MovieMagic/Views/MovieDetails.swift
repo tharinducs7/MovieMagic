@@ -62,7 +62,11 @@ struct MovieDetails: View {
                             .font(.callout)
                             .foregroundColor(.gray)
                         
-                        MovieRating(rating: 5)
+                        if let reviewAverage = movie.reviewAverage {
+                            let roundedRating = Int(reviewAverage.rounded())
+                            MovieRating(rating: roundedRating)
+                        }
+                        
                     }
                     .padding(.trailing, 15)
                     .padding(.top, 30)
@@ -225,6 +229,7 @@ struct MovieDetails: View {
         }
         .sheet(isPresented: $isReviewSheetPresented, content: {
             AddReview(isPresented: $isReviewSheetPresented, movie: movie)
+               
         })
         .padding(.top, 180)
         .padding([.horizontal, .top], 15)

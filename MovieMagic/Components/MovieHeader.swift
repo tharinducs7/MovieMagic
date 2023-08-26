@@ -25,7 +25,10 @@ struct MovieHeader: View {
                         .font(.callout)
                         .foregroundColor(.gray)
                     
-                    MovieRating(rating: 5)
+                    if let reviewAverage = movie.reviewAverage {
+                        let roundedRating = Int(reviewAverage.rounded())
+                        MovieRating(rating: roundedRating)
+                    }
                 }
                 .padding(.leading, 15)
                 

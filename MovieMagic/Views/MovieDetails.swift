@@ -224,10 +224,7 @@ struct MovieDetails: View {
             
         }
         .sheet(isPresented: $isReviewSheetPresented, content: {
-            AddReview(movie: movie)
-                .onTapGesture {
-                    self.hideKeyboard()
-                }
+            AddReview(isPresented: $isReviewSheetPresented, movie: movie)
         })
         .padding(.top, 180)
         .padding([.horizontal, .top], 15)

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddReview: View {
+    @Binding var isPresented: Bool
     var movie: Movie
     @State private var reviewContent: String = ""
     @State private var reviewTitle: String = ""
@@ -73,29 +74,17 @@ struct AddReview: View {
                     .padding(10)
                 
                 Button(action: {
-                }) {
-                    HStack {
-                        
-                        Text("SAVE")
-                            .bold()
-                            .foregroundColor(.white)
-                            .fontDesign(.rounded)
-                            .font(.title2)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(6)
-                    .background(Color("Purple"))
-                    .cornerRadius(10)
-                    .buttonStyle(.borderedProminent)
-                    .buttonBorderShape(.capsule)
-                    .controlSize(.large)
-                }
-                .onTapGesture {
+                    print("error")
                     if reviewContent.isEmpty || reviewTitle.isEmpty || rating == 0 {
                         showAlert = true
                         print("error")
                         self.alertTtitle = "Validation Error"
                         self.alretMsg = "Please fill in all the required fields."
+                        
+                        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in
+                                showAlert = false
+                            }
+                        
                     } else {
                         if let userName = user?.name, let userEmail = user?.email {
                             let newReview = MovieReview(
@@ -115,12 +104,34 @@ struct AddReview: View {
                             self.alertTtitle = "Thank You"
                             self.alretMsg = "Thanks for taking time to review this movie!"
                             
+                            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { timer in
+                                    showAlert = false
+                                    isPresented = false
+                                }
+                            
                         } else {
                             
                             print("test")
                             // Handle the case where user's name or email is nil
                         }
                     }
+                
+                }) {
+                    HStack {
+                        
+                        Text("SAVE")
+                            .bold()
+                            .foregroundColor(.white)
+                            .fontDesign(.rounded)
+                            .font(.title2)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(6)
+                    .background(Color("Purple"))
+                    .cornerRadius(10)
+                    .buttonStyle(.borderedProminent)
+                    .buttonBorderShape(.capsule)
+                    .controlSize(.large)
                 }
                 .alert(isPresented: $showAlert) {
                        Alert(title: Text(alertTtitle),
@@ -159,6 +170,6 @@ struct AddReview: View {
 
 struct AddReview_Previews: PreviewProvider {
     static var previews: some View {
-        AddReview(movie: sampleMovies[0])
+        AddReview(isPresented: .constant(true), movie: sampleMovies[0])
     }
 }

@@ -10,7 +10,8 @@ import SwiftUI
 
 struct Home: View {
     @State private var user: User? = DataManager.shared.getUser()
-   
+    @StateObject private var movieVM = MoviesViewModel()
+    
     var body: some View {
         ZStack{
             VStack {
@@ -47,7 +48,8 @@ struct Home: View {
                 
                 ScrollView {
                     TrendingList()
-                        
+                    
+                    NewList()
                     
                     FavoriteList()
                     

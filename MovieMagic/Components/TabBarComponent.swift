@@ -35,15 +35,9 @@ struct TabBarComponent: View {
                 
                 FavoriteMovies()
                     .tag(Tab.savedMovies)
-                    .onTapGesture {
-                        self.hideKeyboard()
-                    }
                 
                 MovieTheater()
                     .tag(Tab.about)
-                    .onTapGesture {
-                        self.hideKeyboard()
-                    }
             }
             
             CustomTabBar()
